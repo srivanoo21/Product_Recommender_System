@@ -136,4 +136,17 @@ This project is an end-to-end, production-ready, Large Language Model (LLM)-powe
 
 ---
 
+## Full Setup & Deployment Guide
+
+For a step-by-step, hands-on guide to setting up, deploying, and monitoring this project—including Docker, Kubernetes, Minikube, Prometheus, and Grafana—see the [`FULL DOCUMENTATION.md`](./FULL%20DOCUMENTATION.md) file in this repository. It contains:
+- Initial setup and prerequisites
+- VM and cloud configuration
+- Docker and Minikube installation
+- GitHub integration
+- Kubernetes deployment
+- Monitoring setup with Prometheus and Grafana
+- Example commands and troubleshooting tips
+
+Follow the steps in `FULL DOCUMENTATION.md` for a smooth end-to-end deployment experience.
+
 
