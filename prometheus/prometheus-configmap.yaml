@@ -1,3 +1,11 @@
+# -------------------------------------------------------------
+# Prometheus ConfigMap YAML
+# -------------------------------------------------------------
+# This file provides the Prometheus configuration via a Kubernetes ConfigMap.
+# - Sets global scrape interval to 15s.
+# - Configures Prometheus to scrape its own metrics and a Flask app at 34.42.228.136:5000.
+# - Used by the Prometheus deployment to mount /etc/prometheus/prometheus.yml.
+# -------------------------------------------------------------
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -16,4 +24,4 @@ data:
       - job_name: 'flask-app'
         metrics_path: /metrics
         static_configs:
-          - targets: ['34.42.228.136:5000']
+          - targets: ['34.42.228.136:5000']  # replace this IP with VM external IP

@@ -14,7 +14,7 @@ class RAGChainBuilder:
         self.vector_store = vector_store
         self.model = ChatGroq(model=Config.RAG_MODEL, temperature=0.5)
         self.history_store = {}
-
+ 
     def _get_history(self, session_id: str) -> BaseChatMessageHistory:
         if session_id not in self.history_store:
             self.history_store[session_id] = ChatMessageHistory()
@@ -43,14 +43,14 @@ class RAGChainBuilder:
             return getattr(msg, "content", str(msg))
 
         # 1) Rewrite to STRING (not AIMessage)
-        def rewrite_question(inputs: Dict[str, Any]) -> str:
+        def rewrite_question(inputs: Dict[str, Any]) -> str: 
             msg = (context_prompt | self.model).invoke(inputs)
             return to_text(msg)
 
         # 2) Retrieve docs using rewritten STRING
         def get_relevant_documents(inputs: Dict[str, Any]) -> List[Document]:
             rq = rewrite_question(inputs)          # rq is a str now
-            return retriever.invoke(rq)
+            return retriever.invoke(rq) 
 
         # 3) Format docs
         def format_docs(docs: List[Document]) -> str:

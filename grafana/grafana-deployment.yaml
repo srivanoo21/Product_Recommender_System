@@ -1,3 +1,12 @@
+# -------------------------------------------------------------
+# Grafana Deployment & Service YAML
+# -------------------------------------------------------------
+# This file defines the Kubernetes Deployment and Service for Grafana.
+# - Deploys Grafana in the 'monitoring' namespace with 1 replica.
+# - Uses the official grafana/grafana Docker image.
+# - Exposes Grafana on port 3000 via a NodePort service (port 32000).
+# - Allows access to Grafana dashboards for monitoring and visualization.
+# -------------------------------------------------------------
 apiVersion: apps/v1
 kind: Deployment
 metadata:

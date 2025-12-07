@@ -6,11 +6,11 @@ from flipkart.rag_chain import RAGChainBuilder
 from dotenv import load_dotenv
 load_dotenv()
 
-REQUEST_COUNT = Counter("http_requests_total" , "Total HTTP Request")
+REQUEST_COUNT = Counter("http_requests_total", "Total HTTP Request")
 
 def create_app():
 
-    app = Flask(__name__)
+    app = Flask(__name__) 
 
     vector_store = DataIngestor().ingest(load_existing=True)
     rag_chain = RAGChainBuilder(vector_store).build_chain()
@@ -41,4 +41,4 @@ def create_app():
 
 if __name__=="__main__":
     app = create_app()
-    app.run(host="0.0.0.0",port=5000,debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

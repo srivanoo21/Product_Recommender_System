@@ -1,3 +1,12 @@
+# -------------------------------------------------------------
+# Prometheus Deployment & Service YAML
+# -------------------------------------------------------------
+# This file defines the Kubernetes Deployment and Service for Prometheus.
+# - Deploys Prometheus in the 'monitoring' namespace with 1 replica.
+# - Mounts configuration from the 'prometheus-config' ConfigMap.
+# - Exposes Prometheus on port 9090 via a NodePort service (port 32001).
+# - Uses the official prom/prometheus Docker image.
+# -------------------------------------------------------------
 apiVersion: apps/v1
 kind: Deployment
 metadata:
