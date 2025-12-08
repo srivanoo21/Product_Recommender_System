@@ -1,3 +1,12 @@
+"""
+Logger Utility Script
+---------------------
+This script provides a reusable logger setup for the product recommender system.
+- Configures logging format, level, and file output.
+- Ensures consistent logging across all modules for debugging and monitoring.
+- Used throughout the project to record info, warnings, errors, and debug messages.
+"""
+
 import logging
 import os
 from datetime import datetime

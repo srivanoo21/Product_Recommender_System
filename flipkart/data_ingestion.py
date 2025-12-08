@@ -1,3 +1,12 @@
+"""
+Data Ingestion Script
+---------------------
+This script handles the ingestion of product review data into the AstraDB vector store.
+- Uses HuggingFace embeddings to encode review text for semantic search.
+- Loads existing vector store or adds new documents from CSV via DataConverter.
+- Prepares the vector database for retrieval-augmented generation (RAG) workflows.
+"""
+
 from langchain_astradb import AstraDBVectorStore
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from flipkart.data_converter import DataConverter

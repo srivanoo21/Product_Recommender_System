@@ -136,6 +136,27 @@ This project is an end-to-end, production-ready, Large Language Model (LLM)-powe
 
 ---
 
+## Monitoring: Prometheus & Grafana
+
+**Prometheus** is an open-source monitoring and alerting toolkit designed for reliability and scalability. It collects metrics from your application (such as HTTP request counts, latency, resource usage, etc.) at regular intervals and stores them in a time-series database. Prometheus can also trigger alerts based on metric thresholds.
+
+**Grafana** is an open-source analytics and visualization platform. It connects to Prometheus (and other data sources) to create interactive dashboards, charts, and graphs for real-time monitoring and historical analysis.
+
+**Why do we need them?**
+- They provide deep visibility into your application's health, performance, and usage.
+- You can track metrics, detect anomalies, and troubleshoot issues quickly.
+- They enable proactive alerting and capacity planning.
+- In production, monitoring is essential for reliability, debugging, and scaling.
+
+**In this project:**
+- Prometheus scrapes metrics from the Flask app (via `/metrics` endpoint).
+- Grafana visualizes these metrics, allowing you to monitor the recommender system in real time.
+- Both are deployed via Kubernetes manifests (`prometheus/` and `grafana/` folders).
+
+See the [`FULL DOCUMENTATION.md`](./FULL%20DOCUMENTATION.md) for setup and usage instructions.
+
+---
+
 ## Full Setup & Deployment Guide
 
 For a step-by-step, hands-on guide to setting up, deploying, and monitoring this project—including Docker, Kubernetes, Minikube, Prometheus, and Grafana—see the [`FULL DOCUMENTATION.md`](./FULL%20DOCUMENTATION.md) file in this repository. It contains:

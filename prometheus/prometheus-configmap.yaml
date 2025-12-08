@@ -24,4 +24,4 @@ data:
       - job_name: 'flask-app'
         metrics_path: /metrics
         static_configs:
-          - targets: ['34.41.114.62:5000']  # replace this IP with VM external IP
+          - targets: ['136.119.152.184:5000']  # replace this IP with VM external IP

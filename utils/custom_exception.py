@@ -1,3 +1,11 @@
+"""
+Custom Exception Script
+----------------------
+This script defines a custom exception class for the product recommender system.
+- Provides detailed error messages including the file name and line number where the error occurred.
+- Used throughout the project for consistent and informative error handling and logging.
+"""
+
 import sys
 
 class CustomException(Exception):
