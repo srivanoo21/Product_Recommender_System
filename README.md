@@ -4,6 +4,65 @@ This project is an end-to-end, production-ready, Large Language Model (LLM)-powe
 
 ---
 
+## Quick Start: VM, Deployment & Monitoring
+
+This section summarizes the essential hands-on steps for setting up a VM, deploying the app, and enabling monitoring with Prometheus and Grafana. For full details, see [`FULL DOCUMENTATION.md`](./FULL%20DOCUMENTATION.md).
+
+### 1. Create a VM (e.g., Google Cloud)
+- Choose Ubuntu 24.04 LTS, 16GB RAM, 256GB disk, enable HTTP/HTTPS traffic.
+- SSH into your VM.
+
+### 2. Clone Your Repo
+```bash
+git clone https://github.com/srivanoo21/Product_Recommender_System.git
+cd Product_Recommender_System
+```
+
+### 3. Install Docker
+- Follow the official Docker docs for Ubuntu (install, post-install steps, enable on boot).
+- Test with: `docker run hello-world`
+
+### 4. Install Minikube & kubectl
+- Follow official Minikube docs for Linux (binary download).
+- Start Minikube: `minikube start`
+- Install kubectl (e.g., `sudo snap install kubectl --classic`)
+- Check: `minikube status`, `kubectl get nodes`
+
+### 5. Build & Deploy the App
+```bash
+eval $(minikube docker-env)
+docker build -t flask-app:latest .
+kubectl create secret generic llmops-secrets \
+  --from-literal=GROQ_API_KEY="" \
+  --from-literal=ASTRA_DB_APPLICATION_TOKEN="" \
+  --from-literal=ASTRA_DB_KEYSPACE="default_keyspace" \
+  --from-literal=ASTRA_DB_API_ENDPOINT="" \
+  --from-literal=HF_TOKEN="" \
+  --from-literal=HUGGINGFACEHUB_API_TOKEN=""
+kubectl apply -f flask-deployment.yaml
+kubectl get pods
+kubectl port-forward svc/flask-service 5000:80 --address 0.0.0.0
+# Access your app at http://<VM_EXTERNAL_IP>:5000
+```
+
+### 6. Prometheus & Grafana Monitoring
+```bash
+kubectl create namespace monitoring
+kubectl apply -f prometheus/prometheus-configmap.yaml
+kubectl apply -f prometheus/prometheus-deployment.yaml
+kubectl apply -f grafana/grafana-deployment.yaml
+kubectl port-forward --address 0.0.0.0 svc/prometheus-service -n monitoring 9090:9090
+# Prometheus: http://<VM_EXTERNAL_IP>:9090 (default admin:admin)
+kubectl port-forward --address 0.0.0.0 svc/grafana-service -n monitoring 3000:3000
+# Grafana: http://<VM_EXTERNAL_IP>:3000 (default admin:admin)
+```
+
+**Important:**
+- In `prometheus/prometheus-configmap.yaml`, set the `targets` field for the Flask app to your VM's external IP and port (e.g., `['<VM_EXTERNAL_IP>:5000']`).
+- Configure Grafana: Add Prometheus as a data source at `http://prometheus-service.monitoring.svc.cluster.local:9090`.
+
+---
+
 ## Features
 
 - **Conversational Product Recommendations:**  
@@ -109,8 +168,8 @@ This project is an end-to-end, production-ready, Large Language Model (LLM)-powe
   4. Access the app at `http://localhost:5000`
 
 - **Kubernetes:**  
-  1. Apply Prometheus and Grafana YAMLs in the `prometheus/` and `grafana/` folders.
-  2. Expose services via NodePort for external access.
+  1. Follow the **Quick Start: VM, Deployment & Monitoring** steps above for a practical, hands-on setup.
+  2. For detailed instructions, see [`FULL DOCUMENTATION.md`](./FULL%20DOCUMENTATION.md).
 
 ---
 
@@ -152,6 +211,8 @@ This project is an end-to-end, production-ready, Large Language Model (LLM)-powe
 - Prometheus scrapes metrics from the Flask app (via `/metrics` endpoint).
 - Grafana visualizes these metrics, allowing you to monitor the recommender system in real time.
 - Both are deployed via Kubernetes manifests (`prometheus/` and `grafana/` folders).
+
+**See the Quick Start section above for hands-on setup steps.**
 
 See the [`FULL DOCUMENTATION.md`](./FULL%20DOCUMENTATION.md) for setup and usage instructions.
 
