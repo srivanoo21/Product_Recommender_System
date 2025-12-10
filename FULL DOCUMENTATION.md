@@ -212,12 +212,11 @@ URL: http://prometheus-service.monitoring.svc.cluster.local:9090
 
 Click Save & Test
 
-Green success mesaage shown....
+Green success message shown....
 
 
 ######################################
 
 
 Now make a dashboard for different visualization
-See course video for that....
 ```
