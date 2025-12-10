@@ -9,8 +9,8 @@ This script handles the ingestion of product review data into the AstraDB vector
 
 from langchain_astradb import AstraDBVectorStore
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
-from flipkart.data_converter import DataConverter
-from flipkart.config import Config
+from product.data_converter import DataConverter
+from product.config import Config
 
 class DataIngestor:
     def __init__(self):

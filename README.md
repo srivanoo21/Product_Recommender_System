@@ -1,6 +1,6 @@
-# Flipkart Product Recommender System
+# Product Recommender System
 
-This project is an end-to-end, production-ready, Large Language Model (LLM)-powered product recommendation system for Flipkart product reviews. It leverages Retrieval-Augmented Generation (RAG), vector databases, and modern MLOps observability tools (Prometheus, Grafana) to deliver context-aware, conversational product recommendations.
+This project is an end-to-end, production-ready, Large Language Model (LLM)-powered product recommendation system for product reviews. It leverages Retrieval-Augmented Generation (RAG), vector databases, and modern MLOps observability tools (Prometheus, Grafana) to deliver context-aware, conversational product recommendations.
 
 ---
 
@@ -88,11 +88,11 @@ kubectl port-forward --address 0.0.0.0 svc/grafana-service -n monitoring 3000:30
 ## Architecture Overview
 
 1. **Data Ingestion:**  
-   - `flipkart/data_ingestion.py` loads product reviews from CSV, converts them to vector documents, and stores them in AstraDB.
+   - `product/data_ingestion.py` loads product reviews from CSV, converts them to vector documents, and stores them in AstraDB.
    - Embeddings are generated using HuggingFace endpoints.
 
 2. **RAG Chain Construction:**  
-   - `flipkart/rag_chain.py` builds a chain that:
+   - `product/rag_chain.py` builds a chain that:
      - Rewrites user queries using chat history and a prompt template.
      - Retrieves relevant reviews from AstraDB using semantic search.
      - Formats retrieved reviews as context.
@@ -111,10 +111,10 @@ kubectl port-forward --address 0.0.0.0 svc/grafana-service -n monitoring 3000:30
 
 ## Key Files and Directories
 
-- `flipkart/data_ingestion.py` — Loads and embeds product reviews into AstraDB.
-- `flipkart/data_converter.py` — Converts CSV rows to LangChain `Document` objects.
-- `flipkart/rag_chain.py` — Builds the RAG chain for conversational retrieval and answer generation.
-- `flipkart/config.py` — Loads environment variables and model/configuration settings.
+- `product/data_ingestion.py` — Loads and embeds product reviews into AstraDB.
+- `product/data_converter.py` — Converts CSV rows to LangChain `Document` objects.
+- `product/rag_chain.py` — Builds the RAG chain for conversational retrieval and answer generation.
+- `product/config.py` — Loads environment variables and model/configuration settings.
 - `app.py` — Flask app entry point; handles user queries and exposes metrics.
 - `data/flipkart_product_review.csv` — Source data for product reviews.
 - `prometheus/` — Kubernetes YAMLs for Prometheus monitoring.
@@ -184,8 +184,8 @@ kubectl port-forward --address 0.0.0.0 svc/grafana-service -n monitoring 3000:30
 ## Extending
 
 - Add new data sources by updating `data/flipkart_product_review.csv`.
-- Change the embedding or LLM model in `flipkart/config.py`.
-- Customize prompts in `flipkart/rag_chain.py` for different conversational behaviors.
+- Change the embedding or LLM model in `product/config.py`.
+- Customize prompts in `product/rag_chain.py` for different conversational behaviors.
 
 ---
 
